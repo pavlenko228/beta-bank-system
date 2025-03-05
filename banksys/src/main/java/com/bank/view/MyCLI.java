@@ -2,8 +2,11 @@ package com.bank.view;
 
 import java.util.Scanner;
 
-import com.bank.domain.AccountType;
+import org.springframework.stereotype.Component;
 
+import com.bank.model.AccountType;
+
+@Component
 public class MyCLI implements CLIUI {
     private final Scanner scanner;
 

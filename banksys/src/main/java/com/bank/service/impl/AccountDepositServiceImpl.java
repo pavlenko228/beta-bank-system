@@ -1,18 +1,20 @@
 package com.bank.service.impl;
 
-import com.bank.dao.AccountDAO;
-import com.bank.domain.Account;
+import org.springframework.stereotype.Service;
+
+import com.bank.model.AccountDTO;
+import com.bank.repository.AccountDAO;
 import com.bank.service.AccountDepositService;
 
-public class AccountDepositServiceImpl implements AccountDepositService{
-    private AccountDAO accountDAO;
+import lombok.RequiredArgsConstructor;
 
-    public AccountDepositServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
+@Service
+@RequiredArgsConstructor
+public class AccountDepositServiceImpl implements AccountDepositService{
+    private final AccountDAO accountDAO;
     
     @Override
-    public void deposit(Account account, double amount) {
+    public void deposit(AccountDTO account, double amount) {
         System.out.println("call upate account in accountdepositserviceimpl");
         accountDAO.updateAccount(account, account.getBalance() + amount);
     }

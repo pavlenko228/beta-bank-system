@@ -1,23 +1,24 @@
 package com.bank.service;
 
-import com.bank.dao.TransactionDAO;
-import com.bank.domain.Account;
-import com.bank.domain.OperationType;
-import com.bank.domain.Transaction;
+import org.springframework.stereotype.Service;
 
+import com.bank.model.AccountDTO;
+import com.bank.model.OperationType;
+import com.bank.model.TransactionDTO;
+import com.bank.repository.TransactionDAO;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class TransactionDeposit {
-    private AccountDepositService accountDepositService;
-    private TransactionDAO transactionDAO;
+    private final AccountDepositService accountDepositService;
+    private final TransactionDAO transactionDAO;
 
-    public TransactionDeposit(AccountDepositService accountDepositService, TransactionDAO transactionDAO) {
-        this.accountDepositService = accountDepositService;
-        this.transactionDAO = transactionDAO;
-    }
-
-    public void execute(Account account, double deposit) {
+    public void execute(AccountDTO account, double deposit) {
         System.out.println("call in transaction deposit");
         accountDepositService.deposit(account, deposit);
-        Transaction transaction = new Transaction(account, deposit, OperationType.DEPOSIT);
+        TransactionDTO transaction = new TransactionDTO(account, deposit, OperationType.DEPOSIT);
         transactionDAO.addTransaction(transaction);
     }
 }

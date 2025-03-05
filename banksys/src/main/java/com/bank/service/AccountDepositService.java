@@ -1,7 +1,7 @@
 package com.bank.service;
 
-import com.bank.domain.Account;
+import com.bank.model.AccountDTO;
 
 public interface AccountDepositService {
-    public void deposit(Account account, double amount);
+    public void deposit(AccountDTO account, double amount);
 }

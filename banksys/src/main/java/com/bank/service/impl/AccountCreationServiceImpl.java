@@ -1,23 +1,25 @@
 package com.bank.service.impl;
 
-import com.bank.dao.AccountDAO;
-import com.bank.domain.Account;
-import com.bank.domain.AccountType;
-import com.bank.domain.CheckingAccount;
-import com.bank.domain.FixedAccount;
-import com.bank.domain.SavingAccount;
+import org.springframework.stereotype.Service;
+
+import com.bank.model.AccountDTO;
+import com.bank.model.AccountType;
+import com.bank.model.CheckingAccount;
+import com.bank.model.FixedAccount;
+import com.bank.model.SavingAccount;
+import com.bank.repository.AccountDAO;
 import com.bank.service.AccountCreationService;
 
-public class AccountCreationServiceImpl implements AccountCreationService {
-    private AccountDAO accountDAO;
+import lombok.RequiredArgsConstructor;
 
-    public AccountCreationServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
+@Service
+@RequiredArgsConstructor
+public class AccountCreationServiceImpl implements AccountCreationService {
+    private final AccountDAO accountDAO;
 
     @Override
     public void create(AccountType accountType, String clientID, String accountID) {
-        Account account;
+        AccountDTO account;
         if (accountType.equals(AccountType.FIXED)) {
             account = new FixedAccount(accountID, clientID, 0);
         } else if (accountType.equals(AccountType.SAVING)) {

@@ -2,9 +2,9 @@ package com.bank;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.bank.contoroller.AccountBasicCLI;
-import com.bank.contoroller.TransactionDepositCLI;
-import com.bank.contoroller.TransactionWithdrawCLI;
+import com.bank.controller.AccountBasicCLI;
+import com.bank.controller.TransactionDepositCLI;
+import com.bank.controller.TransactionWithdrawCLI;
 import com.bank.view.MyCLI;
 
 import java.util.Scanner;
@@ -25,13 +25,13 @@ public class Main {
     public static void main(String[] args) {
         
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        MyCLI myCLI = context.getBean("myCLI", MyCLI.class);
+        MyCLI myCLI = context.getBean(MyCLI.class);
         Scanner scanner = myCLI.getScanner();
         String clientId = myCLI.requestClientAccountNumber();
         System.out.println(help);
-        AccountBasicCLI accountBasicCLI = context.getBean("accountBasicCLI", AccountBasicCLI.class);
-        TransactionDepositCLI transactionDepositCLI = context.getBean("transactionDepositCLI", TransactionDepositCLI.class);
-        TransactionWithdrawCLI transactionWithdrawCLI = context.getBean("transactionWithdrawCLI", TransactionWithdrawCLI.class);
+        AccountBasicCLI accountBasicCLI = context.getBean(AccountBasicCLI.class);
+        TransactionDepositCLI transactionDepositCLI = context.getBean(TransactionDepositCLI.class);
+        TransactionWithdrawCLI transactionWithdrawCLI = context.getBean(TransactionWithdrawCLI.class);
         // TransferCLI transferCLI = context.getBean("transferCLI", TransferCLI.class);
 
        

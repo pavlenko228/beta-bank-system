@@ -1,23 +1,23 @@
 package com.bank.service;
 
-import com.bank.dao.TransactionDAO;
-import com.bank.domain.Account;
-import com.bank.domain.OperationType;
-import com.bank.domain.Transaction;
+import org.springframework.stereotype.Service;
 
+import com.bank.model.AccountDTO;
+import com.bank.model.OperationType;
+import com.bank.model.TransactionDTO;
+import com.bank.repository.TransactionDAO;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class TransactionWithdraw {
-    private AccountWithdrawService accountWithdrawService;
-    private TransactionDAO transactionDAO;
-    
-    public TransactionWithdraw(AccountWithdrawService accountWithdrawService,
-                               TransactionDAO transactionDAO) {
-        this.accountWithdrawService = accountWithdrawService;
-        this.transactionDAO = transactionDAO;
-    }
+    private final AccountWithdrawService accountWithdrawService;
+    private final TransactionDAO transactionDAO;
 
-    public void execute(Account account, double amount) {
+    public void execute(AccountDTO account, double amount) {
         accountWithdrawService.deposit(account, amount);
-        Transaction transaction = new Transaction(account, amount, OperationType.WITHDRAW);
+        TransactionDTO transaction = new TransactionDTO(account, amount, OperationType.WITHDRAW);
         transactionDAO.addTransaction(transaction);
     }
 }

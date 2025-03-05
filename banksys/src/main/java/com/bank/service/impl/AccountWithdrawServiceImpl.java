@@ -1,18 +1,20 @@
 package com.bank.service.impl;
 
-import com.bank.dao.AccountDAO;
-import com.bank.domain.Account;
+import org.springframework.stereotype.Service;
+
+import com.bank.model.AccountDTO;
+import com.bank.repository.AccountDAO;
 import com.bank.service.AccountWithdrawService;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class AccountWithdrawServiceImpl implements AccountWithdrawService {
-    private AccountDAO accountDAO;
-    
-    public AccountWithdrawServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
+    private final AccountDAO accountDAO;
 
     @Override
-    public void deposit(Account account, double amount) {
+    public void deposit(AccountDTO account, double amount) {
         accountDAO.updateAccount(account, account.getBalance() - amount);
     }
 

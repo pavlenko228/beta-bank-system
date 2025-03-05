@@ -1,14 +1,16 @@
 package com.bank.service;
 
-import com.bank.domain.AccountType;
+import org.springframework.stereotype.Service;
 
+import com.bank.model.AccountType;
+
+import lombok.RequiredArgsConstructor;
+
+@Service   
+@RequiredArgsConstructor
 public class BankCore {
     private static long lastAccountNumber = 1;
-    private AccountCreationService accountCreationService;
-
-    public BankCore(AccountCreationService accountCreationService) {
-        this.accountCreationService = accountCreationService;
-    }
+    private final AccountCreationService accountCreationService;
 
     public void createNewAccount(AccountType accountType, String clientID) {
         if (accountType == null) {

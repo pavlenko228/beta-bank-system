@@ -2,22 +2,24 @@ package com.bank.service.impl;
 
 import java.util.List;
 
-import com.bank.dao.AccountDAO;
-import com.bank.domain.Account;
-import com.bank.domain.AccountType;
-import com.bank.domain.AccountWithdraw;
+import org.springframework.stereotype.Service;
+
+import com.bank.model.AccountDTO;
+import com.bank.model.AccountType;
+import com.bank.model.AccountWithdraw;
+import com.bank.repository.AccountDAO;
 import com.bank.service.AccountListingService;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class AccountListingServiceImpl implements AccountListingService {
 
-    private AccountDAO accountDAO;
-
-    public AccountListingServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    } 
+    private final AccountDAO accountDAO;
 
     @Override
-    public Account getClientAccount(String clientID, String accountID) {
+    public AccountDTO getClientAccount(String clientID, String accountID) {
         return accountDAO.getClientAccount(clientID, accountID);
     }
 
@@ -27,12 +29,12 @@ public class AccountListingServiceImpl implements AccountListingService {
     }
 
     @Override
-    public List<Account> getClientAccounts(String clientID) {
+    public List<AccountDTO> getClientAccounts(String clientID) {
         return accountDAO.getClientAccounts(clientID);
     }
 
     @Override
-    public List<Account> getClientAccountsByType(String clientID, AccountType accountType) {
+    public List<AccountDTO> getClientAccountsByType(String clientID, AccountType accountType) {
         return accountDAO.getClientAccountsByType(clientID, accountType);
     }
 }
